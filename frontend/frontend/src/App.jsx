@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import SignUp from './pages/SignUp.jsx'
-export const serverUrl = "http://localhost:8000"
+export const serverUrl = "https://virtual-courses-x7fg.onrender.com"
 import { ToastContainer } from "react-toastify"
 import getCurrentUser from './customHooks/getCurrentUser.js'
 import { useSelector } from 'react-redux'
