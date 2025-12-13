@@ -27,6 +27,8 @@ function MyEnrolledCourses() {
                 setCourses(res.data);
             } catch (error) {
                 console.log("Error fetching courses:", error);
+                 console.log("USER ID:", req.userId);
+
             }
         };
         fetchCourses();
@@ -38,6 +40,7 @@ function MyEnrolledCourses() {
                 className='absolute top-[3%] md:top-[6%] left-[5%] w-[22px] h-[22px] cursor-pointer'
                 onClick={() => navigate('/')}
             />
+           
             <h1 className='text-3xl text-center font-bold text-gray-800 mb-6'>
                 {userData?.role === "student" ? "My Enrolled Courses" : "My Created Courses"}
             </h1>
