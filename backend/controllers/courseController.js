@@ -190,7 +190,7 @@ export const removeLecture = async (req, res) => {
 
 export const getcreatorById = async (req, res) => {
     try {
-        const { userId } = req.body
+        const { userId } = req.userId
 
         const user = await User.findById(userId).select("-password")
         if (!user) {
