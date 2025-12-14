@@ -10,20 +10,25 @@ function MyEnrolledCourses() {
     const navigate = useNavigate();
     const [courses, setCourses] = useState([]);
 
-   useEffect(() => { const fetchCourses = async () => { 
-       try { let res; if (userData?.role === "student") 
-       { res = await axios.get( ${serverUrl}/api/course/getEnrolledCourses, 
-   { withCredentials: true } );
-       } 
-   else { res = await axios.get( ${serverUrl}/api/course/getcreator, 
-   { withCredentials: true });
-        } setCourses(res.data);
-           } 
-   catch (error) { 
-       console.log("Error fetching courses:", error.response?.data || error.message); } }; if (userData)
-   { fetchCourses();
-   }
-                   }, [userData]);
+   useEffect(() => { 
+       const fetchCourses = async () => { 
+       try 
+       { 
+      const token = localStorage.getItem("token");
+if (!token) throw new Error("User does not have token");
+
+let res;
+if (userData?.role === "student") {
+    res = await axios.get(`${serverUrl}/api/course/getEnrolledCourses`, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+} else {
+    res = await axios.get(`${serverUrl}/api/course/getcreator`, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+}
+setCourses(res.data);}
+
 
 
     return (
