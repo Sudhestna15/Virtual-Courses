@@ -10,29 +10,34 @@ function MyEnrolledCourses() {
     const navigate = useNavigate();
     const [courses, setCourses] = useState([]);
 
-    
     useEffect(() => {
-        const fetchCourses = async () => {
-            try {
-                const token = localStorage.getItem("token");
-                const headers = { Authorization: `Bearer ${token}` };
+    const fetchCourses = async () => {
+        try {
+            let res;
 
-                let res;
-                if (userData?.role === "student") {
-                    res = await axios.get(`${serverUrl}/api/course/getEnrolledCourses`, { headers });
-                } else {
-                    res = await axios.get(`${serverUrl}/api/course/getcreator`, { headers });
-                }
-
-                setCourses(res.data);
-            } catch (error) {
-                console.log("Error fetching courses:", error);
-                 console.log("USER ID:", req.userId);
-
+            if (userData?.role === "student") {
+                res = await axios.get(
+                    `${serverUrl}/api/course/getEnrolledCourses`,
+                    { withCredentials: true }
+                );
+            } else {
+                res = await axios.get(
+                    `${serverUrl}/api/course/getcreator`,
+                    { withCredentials: true }
+                );
             }
-        };
+
+            setCourses(res.data);
+        } catch (error) {
+            console.log("Error fetching courses:", error.response?.data || error.message);
+        }
+    };
+
+    if (userData) {
         fetchCourses();
-    }, [userData]);
+    }
+}, [userData]);
+
 
     return (
         <div className='min-h-screen w-full px-4 py-9 bg-gray-50'>
