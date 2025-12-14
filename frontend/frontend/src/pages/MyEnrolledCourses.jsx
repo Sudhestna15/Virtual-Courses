@@ -48,7 +48,7 @@ function MyEnrolledCourses() {
             {courses.length === 0 ? (
                 <p className='text-gray-500 text-center w-full'>
                     {userData?.role === "student"
-                        ? "You haven't enrolled in  course yet"
+                        ? "You haven't enrolled in any course yet"
                         : "You haven't created any course yet"}
                 </p>
             ) : (
