@@ -42,10 +42,11 @@ export const verifyPayment = async (req, res) => {
             await user.save()
 
             const course = await Course.findById(courseId)
-            if (!course.enrolledCourses) course.enrolledCourses = []
-            if (!course.enrolledCourses.includes(userId)) {
-                course.enrolledCourses.push(userId)
-            }
+          if (!course.enrolled) course.enrolled = []
+if (!course.enrolled.includes(userId)) {
+    course.enrolled.push(userId)
+}
+
             await course.save()
 
             return res.status(200).json({ message: "payment verified and enrollment successful" })
